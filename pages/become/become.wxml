@@ -27,7 +27,7 @@
       <view class='fl'>
         联系方式
       </view>
-      <input class='fr'  bindinput='phone_value' value="{{wxid}}"></input>
+      <input class='fr'  bindinput='phone_value' placeholder-class='place' value="{{wxid}}" placeholder="请填写联系方式"></input>
     </view>
     <view class='fu clearfix'>
       <image src='/pages/image/right.png' class='right'></image>
@@ -54,6 +54,41 @@
       </view>
     </view>
     <image src='/pages/image/border.png' class='border'></image>
+    <view class='caiyi'>
+      <view class='clearfix caiyi_fu'>
+        <view class='fl'>
+        才艺展示
+        </view>
+        <image class='fr' src='/pages/image/chonglu2.png' bindtap='chonglu' wx-if="{{luyin_wancheng}}"></image>
+      </view>
+      <view class='luyin' wx-if="{{!luyin_wancheng}}" bindtap='open_luyin_ing'>
+        <image src='/pages/image/huatong2.png'></image>
+        <text>点击说话</text>
+      </view> 
+      <view class='luyin2'  bindtap='play' wx-if="{{luyin_wancheng}}">
+        <image src='/pages/image/laba.png' wx-if="{{show_dong}}"></image>
+        <image src='/pages/image/laba.gif' wx-if="{{!show_dong}}"></image>
+        <text>{{miao}}``</text>
+      </view>
+    </view>
+    <view class="qiang">
+      <view class='tt'>照片墙<text>(最多8张)</text></view>
+      <view class='ims'>
+        <view class='image_arr_fu clearfix'>
+          <block wx:for="{{image_arr}}" wx:key="index">
+            <view class="q-image-wrap">
+              <!-- 图片缩略图  -->
+              <image class="q-image" src="{{item}}" mode="aspectFill" data-idx="{{index}}" bindtap="handleImagePreview"></image>
+              <!-- 移除图片的按钮  -->
+              <image src='../image/remo.png' class="q-image-remover" data-idx="{{index}}" bindtap="removeImage"></image>
+            </view>
+          </block>
+          <view class='add fl' bindtap='chooseImage'  wx:if="{{image_arr.length < 8}}">
+            +
+          </view>
+        </view>
+      </view>
+    </view>
     <view class='fu clearfix'>
       <view class='fl'>
         教育背景
@@ -70,7 +105,10 @@
       <view>
         工作经历
       </view>
-      <textarea placeholder='请填写您的工作经历' bindinput='jingli_value' value='{{jingli}}'></textarea>
+      <textarea placeholder='请填写您的工作经历' bindinput='jingli_value' value='{{jingli}}' wx-if="{{textarea_tf}}"></textarea>
+      <view class="textarea" wx-if="{{!textarea_tf}}">
+        {{jingli}}
+      </view>
     </view>
     <view class='bor'></view>
     <view class='fu clearfix'>
@@ -107,11 +145,37 @@
     <view class='sub' bindtap='sub'>
       提交认证
     </view>
-
-
-
-
   </view>
-  
+
+  <!-- 录音弹窗 -->
+  <view class='luyin_box' catchtouchmove='true' wx-if="{{yin_box}}"></view>
+  <view class='luyin_ing' catchtouchmove='true' wx-if="{{luyin_ing}}">
+    <image src='/pages/image/x.png' class='x' bindtap='close_luyin_ing'></image>
+    <view class='lu_tit'>
+      请说，我正在聆听您的求译…
+    </view>
+    <view class='lu_click' bindtap='stop_luyin'>
+      点击结束录音
+    </view>
+    <image src='/pages/image/dong.gif' class='gif'></image>
+    <view class='lu_miao'>
+      {{miao}}s
+    </view>
+  </view>
+  <view class='luyin_complete' wx-if="{{luyin_complete}}">
+    <view class='lu_tit'>
+      可以试听自己的求译内容哦
+    </view>
+    <view class='mp3 clearfix' bindtap='play'>
+      <image src='/pages/image/mp3.png' wx-if="{{show_dong}}"></image>
+      <image src='/pages/image/mp3.gif' wx-if="{{!show_dong}}"></image>
+      <text>{{miao}}s</text>
+    </view>
+    <view class='anniu'>
+      <image src='/pages/image/com.png' class='com' bindtap='wancheng'></image>
+      <image src='/pages/image/chonglu.png' bindtap='chonglu'></image>
+    </view>
+  </view>
+
 </view>
 

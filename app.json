@@ -1,16 +1,18 @@
 {
   "pages": [
     "pages/start/start",
-    "pages/map/map",
     "pages/rob/rob",
-    "pages/become/become",
+    "pages/release/release",
     "pages/liulan/liulan",
     "pages/detil/detil",
+    "pages/map/map",
+    "pages/biaoqian/biaoqian",
+    "pages/dingdan/dingdan",
     "pages/wode/wode",
-    "pages/release/release",
+    "pages/become/become",
+    "pages/shezhi/shezhi",
     "pages/qianbao/qianbao",
     "pages/mingxi/mingxi",
-    "pages/dingdan/dingdan",
     "pages/change_wx/change_wx",
     "pages/success/success",
     "pages/xieyi/xieyi",
@@ -18,8 +20,9 @@
     "pages/yijian/yijian",
     "pages/status/status",
     "pages/share/share",
-    "pages/button/button",
-    "pages/index/index"
+    "pages/nav/nav",
+    "pages/index/index",
+    "pages/button/button"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -29,7 +32,7 @@
   },
   "permission": {
     "scope.userLocation": {
-      "desc": "你的位置信息将用于小程序位置接口的效果展示"
+      "desc": "需要获取您的地理位置，请确认授权，否则地图功能将无法使用"
     }
   },
   "sitemapLocation": "sitemap.json"

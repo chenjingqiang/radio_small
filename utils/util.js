@@ -15,8 +15,22 @@ const formatNumber = n => {
 }
 var ajaxurl ='https://www.uear.net/ajax2/'
 
-
+//获取分享标题
+const get_title=function(that){
+  wx.request({
+    url: 'https://www.uear.net/ajax2/random_text.php',
+    data: {
+    },
+    method: 'GET',
+    success: function (res) {
+      that.setData({
+        tit: res.data.data
+      })
+    }
+  })
+}
 module.exports = {
   formatTime: formatTime,
-  ajaxurl: ajaxurl
+  ajaxurl: ajaxurl,
+  get_title: get_title
 }

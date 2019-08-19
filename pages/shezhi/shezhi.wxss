@@ -1,0 +1,80 @@
+/* pages/shezhi/shezhi.wxss */
+.tit{
+  height: 125rpx;
+  padding-left: 40rpx;
+}
+.tit view{
+  font-size: 32rpx;
+  color: #333333;
+  margin-top: 40rpx;
+}
+.tit image{
+  width: 145rpx;
+  height: 125rpx;
+}
+.bor{
+  height: 20rpx;
+  background: #EBEBEB;
+}
+.con{
+  width: 670rpx;
+  margin: 0 auto;
+  overflow: hidden;
+}
+.list_fu{
+  width: 750rpx;
+}
+.list{
+  width: 105rpx;
+  text-align: center;
+  float: left;
+  margin-bottom: 30rpx;
+  margin-right: 83rpx;
+}
+.list image{
+  box-sizing: border-box;
+  width: 80rpx;
+  height: 80rpx;
+}
+.list .bold{
+  border: 4rpx solid #5A85E7;
+  border-radius: 50%;
+}
+.list view{
+  font-size: 26rpx;
+  color: #4764BF;
+}
+.con .tt{
+  font-size: 32rpx;
+  color: #333333;
+  margin-top: 40rpx;
+  margin-bottom: 28rpx;
+}
+.sub{
+  width: 600rpx;
+  height: 80rpx;
+  position: fixed;
+  left: 50%;
+  margin-left: -300rpx;
+  bottom: 120rpx;
+  background: #CCCCCC;
+  border-radius: 8rpx;
+  text-align: center;
+  line-height: 80rpx;
+  font-size: 30rpx;
+  color: #FFFFFF;
+}
+.sub2{
+  width: 600rpx;
+  height: 80rpx;
+  position: fixed;
+  left: 50%;
+  margin-left: -300rpx;
+  bottom: 120rpx;
+  background: #799DF1;
+  border-radius: 8rpx;
+  text-align: center;
+  line-height: 80rpx;
+  font-size: 30rpx;
+  color: #FFFFFF;
+}

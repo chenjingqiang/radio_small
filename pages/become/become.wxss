@@ -126,6 +126,13 @@
   color: #333;
   line-height: 45rpx;
 }
+.fu .textarea{
+  width: 670rpx;
+  height: 222rpx;
+  font-size: 32rpx;
+  color: #333;
+  line-height: 45rpx;
+}
 .bor{
  height: 2rpx;
  background: #ccc;
@@ -163,5 +170,202 @@
   text-align: center;
   line-height: 80rpx;
 }
-
+.caiyi{
+  margin-bottom: 40rpx;
+}
+.caiyi_fu{
+  font-size: 32rpx;
+  color: #333333;
+  margin-top: 50rpx;
+}
+.caiyi_fu image{
+  width: 100rpx;
+  height: 44rpx;
+}
+.luyin{
+  width: 670rpx;
+  height: 80rpx;
+  background: #BCD0FD;
+  border-radius: 40rpx;
+  margin: 0 auto;
+  margin-top: 30rpx;
+  line-height: 80rpx;
+  text-align: center;
+  font-size: 30rpx;
+  color: #799BEF;
+  display: flex;
+  align-items: center;
+}
+.luyin2{
+  width: 670rpx;
+  height: 80rpx;
+  background: #71C987;
+  border-radius: 40rpx;
+  line-height: 80rpx;
+  margin-top: 30rpx;
+}
+.luyin2 image{
+  float: left;
+  width: 20rpx;
+  height: 32rpx;
+  margin-left: 40rpx;
+  margin-right: 268rpx;
+  margin-top: 24rpx;
+}
+.luyin2 text{
+  float: left;
+  font-size: 24rpx;
+  color: #fff;
+}
+.luyin image{
+  width: 30rpx;
+  height: 50rpx;
+  margin-left: 240rpx;
+  margin-right: 40rpx;
+}
+.luyin_box{
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.60);
+}
+.luyin_ing{
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 650rpx;
+  z-index: 11;
+  background: #fff;
+  text-align: center;
+}
+.x{
+  position: absolute;
+  top: 40rpx;
+  right: 40rpx;
+  width: 34rpx;
+  height: 34rpx;
+}
+.lu_tit{
+  font-size: 40rpx;
+  color: #111111;
+  letter-spacing: 1.8rpx;
+  margin-top: 110rpx;
+}
+.lu_click{
+  font-size: 34rpx;
+  color: #666666;
+  letter-spacing:1.2rpx;
+  opacity: 0.99;
+  height: 250rpx;
+  line-height: 250rpx;
+}
+.gif{
+  width: 636rpx;
+  height: 46rpx;
+}
+.lu_miao{
+  font-size: 30rpx;
+  color: #FF9D4D;
+  letter-spacing: 1.3rpx;
+  margin-top: 30rpx;
+}
+.luyin_complete{
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 650rpx;
+  z-index: 11;
+  background: #fff;
+  text-align: center;
+}
+.mp3{
+  width: 500rpx;
+  height: 88rpx;
+  background: #71C987;
+  border-radius: 44rpx;
+  margin: 0 auto;
+  margin-top: 63rpx;
+  margin-bottom: 102rpx;
+  text-align: center;
+  line-height: 88rpx;
+  font-size: 30rpx;
+  color: #FFFFFF;
+}
+.mp3 image{
+  float: left;
+  width: 25rpx;
+  height: 47rpx;
+  margin-left: 40rpx;
+  margin-top: 20rpx;
+}
+.mp3 text{
+  float: left;
+  margin-left: 180rpx;
+}
+.anniu{
+  text-align: left;
+}
+.anniu image{
+  width: 94rpx;
+  height: 146rpx;
+}
+.anniu .com{
+  margin-left: 175rpx;
+  margin-right: 209rpx;
+}
+.qiang{
+  margin-bottom: 40rpx;
+}
+.qiang .tt{
+  font-size: 32rpx;
+  color: #333333;
+  text-align: left;
+  margin-top: 40rpx;
+}
+.qiang .tt text{
+  font-size: 26rpx;
+  color: #999;
+  margin-left: 6rpx;
+}
+.qiang .add{
+  width: 154rpx;
+  height: 154rpx;
+  line-height: 154rpx;
+  text-align: center;
+  font-size: 78rpx;
+  color: #aaa;
+  border: 2rpx dashed #aaa;
+}
+.qiang .ims {
+  width: 690rpx;
+  overflow: hidden;
+  margin-top: 30rpx;
+}
+.image_arr_fu{
+  width: 710rpx;
+}
+.q-image-wrap{
+  float: left;
+  width: 154rpx;
+  height: 154rpx;
+  position: relative;
+  margin-right: 18rpx;
+  margin-bottom: 15rpx;
+}
+.q-image-wrap image{
+  width: 154rpx;
+  height: 154rpx;
+}
+.q-image-wrap .q-image-remover{
+  position: absolute;
+  width: 56rpx;
+  height: 56rpx;
+  right: 0;
+  top: 0;
+}
 

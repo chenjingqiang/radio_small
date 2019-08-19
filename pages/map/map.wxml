@@ -1,6 +1,35 @@
 <!--pages/map/map.wxml-->
-<map  id="map" latitude='{{latitude}}' longitude='{{longitude}}' markers="{{markers}}" bindmarkertap='markersAction' bindupdated='jieshu'></map>
-
+<view class="map">
+  <map  id="map" latitude='{{latitude}}' longitude='{{longitude}}' markers="{{markers}}" bindmarkertap='markersAction'>
+    <cover-image src="/pages/image/shezhi.png" class="shezhi" bindtap="shezhi" wx-if="{{shezhi_tf}}"></cover-image >
+    <cover-image  src="/pages/image/qp.png" class="qp" bindtap="qp" wx-if="{{qp_tf==0}}"></cover-image >
+    <!-- 底部导航 -->
+    <cover-view class="footer2">
+      <cover-view class='footer clearfix'>
+        <button open-type="getUserInfo" id='show-author' bindgetuserinfo="getUserInfo" wx-if="{{get_user}}"></button>
+        <cover-view bindtap='fabu' class="footer_fabu">
+          <cover-image src='{{bar[0]}}'></cover-image>
+        </cover-view>
+        <cover-view  bindtap='liulan'>
+          <cover-image src='{{bar[3]}}'></cover-image>
+        </cover-view>
+        
+        <cover-view bindtap='dingdan' class="footer_fadan">
+          <cover-image src='{{bar[1]}}'></cover-image>
+        </cover-view>
+        <cover-view bindtap='wode'>
+          <cover-image src='{{bar[2]}}'></cover-image>
+        </cover-view>
+     </cover-view>
+     <cover-view bindtap='map' class="footer_map">
+        <cover-image src='{{bar[4]}}'></cover-image>
+      </cover-view>
+    </cover-view>
+  </map>
+  
+   
+  
+</view>
 
 
 

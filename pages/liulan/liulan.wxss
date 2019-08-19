@@ -32,6 +32,37 @@
   right: 0;
   top: 0;
 }
+.dengji{
+  margin-left: 40rpx;
+}
+.grade_num{
+  font-size: 24rpx;
+  color: #F3AD1E;
+  margin-right: 4rpx;
+}
+.grade_name{
+  font-size: 26rpx;
+  color: #8A8BF6;
+}
+.dengjitiao{
+  position: relative;
+  margin-top: 11rpx;
+}
+.dj_bottom{
+  width: 160rpx;
+  height: 12rpx;
+  background: #D8D8D8;
+  border-radius: 6rpx;
+}
+.dj_top{
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  height: 12rpx;
+  background: #8A8BF6;
+  border-radius: 6rpx;
+}
 .tw_tit{
   font-size: 32rpx;
   color: #FFFFFF;
@@ -70,15 +101,83 @@
   line-height: 70rpx;
   font-weight: bold;
 }
-
+.search{
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 6;
+  width: 100%;
+  height: 88rpx;
+  box-shadow: 0 1px 0 0 #CCCCCC;
+  background: #fff;
+}
+.sou_fu{
+  width: 464rpx;
+  height: 64rpx;
+  background: #F5F5F5;
+  border-radius: 32rpx;
+  margin-top: 12rpx;
+  margin-left: 40rpx;
+}
+.search image{
+  width: 88rpx;
+  height: 88rpx;
+  margin-left: 20rpx;
+}
+.sou_fu image{
+  width: 30rpx;
+  height: 30rpx;
+  margin-left: 30rpx;
+  margin-top: 17rpx;
+}
+.sou_fu .xx{
+  width: 64rpx;
+  height: 64rpx;
+  margin-left: 0;
+  margin-top: 0;
+}
+.sou_fu input{
+  width: 326rpx;
+  height: 64rpx;
+  margin-left: 14rpx;
+  text-align: center;
+  color: #333;
+  font-size: 28rpx;
+}
+.search .paixu_xuankuang{
+  box-sizing: border-box;
+  position: absolute;
+  top: 65rpx;
+  left:305rpx;
+  width: 417rpx;
+  height: 332rpx;
+  z-index: 7;
+  background: url('https://www.uear.net/img/beijing1.png') no-repeat center;
+  background-size: 100% 100%;
+  padding-left: 32rpx;
+  padding-top: 21rpx;
+}
+.paixu_xuankuang view{
+  width: 370rpx;
+  font-size: 26rpx;
+  color: #333;
+  text-align: center;
+  height: 90rpx;
+  line-height: 90rpx;
+}
+.paixu_xuankuang .act{
+  color: #79D28F;
+}
 .list_fu{
   background: #EBEBEB;
+  margin-top: 88rpx;
 }
 .list{
   position: relative;
   padding-top: 30rpx;
   margin-bottom: 20rpx;
   background: #fff;
+  padding-bottom: 40rpx;
 }
 .year{
   position: absolute;
@@ -151,6 +250,19 @@
   font-size: 34rpx;
   color: #333333;
 }
+.name .red{
+  color: #F36963;
+}
+.hua{
+  margin-left: 50rpx;
+}
+.hua image{
+  width: 52rpx;
+  height: 52rpx;
+  border: 2rpx solid #5A85E7;
+  border-radius: 50%;
+  margin-left: -10rpx;
+}
 .add{
   height: 44rpx;
   border: 2rpx solid #CCCCCC;
@@ -163,21 +275,34 @@
   line-height: 44rpx;
   padding: 0 16rpx;
 }
-.peo{
+.l_l{
   margin-top: 18rpx;
   height: 44rpx;
   font-size: 24rpx;
   color: #999999;
+  display: flex;
+  align-items: center;
+}
+.l_l image{
+  width: 19rpx;
+  height: 24rpx;
+  margin-right: 12rpx;
+}
+.peo{
+  height: 44rpx;
+  font-size: 24rpx;
+  color: #999999;
   line-height: 44rpx;
+  margin-left: 238rpx;
 }
 .peo image{
   width: 30rpx;
   height: 20rpx;
-  margin-right: 5rpx;
+  margin-right: 6rpx;
 }
 .biaoqian{
   width: 500rpx;
-  margin-bottom: 24rpx;
+  margin-bottom: 10rpx;
 }
 .biaoqian view{
   float: left;
@@ -190,6 +315,16 @@
   text-align: center;
   line-height: 48rpx;
   margin-right: 18rpx;
+  margin-bottom: 18rpx;
+}
+.search_kong{
+  width: 100%;
+  height: 540rpx;
+  margin-top: 88rpx;
+}
+.biaoqian .red{
+  color: #FFFFFF;
+  background: #F36963;
 }
 .biaoqian image{
   float: left;
@@ -210,6 +345,11 @@
   line-height: 48rpx;
   margin-right: 30rpx;
   margin-bottom: 20rpx;
+}
+.yuyan .red{
+  color: #FFFFFF;
+  background: #F36963;
+  border: 2rpx solid #F36963;
 }
 .yuyan image{
   float: left;

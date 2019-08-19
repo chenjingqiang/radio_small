@@ -1,11 +1,9 @@
 <!--index.wxml-->
-<view class="index" >
-  <button open-type="getUserInfo" class='show-author' bindgetuserinfo="getUserInfo" wx-if="{{get_user}}" catchtouchmove='true'></button>
-    <input placeholder='请输入您的微信号' placeholder-class="phcolor" bindinput="input"></input>
-    <text>输入您的微信号，则表示您同意与翻译官/用户交换微信，提供/接受服务。</text>
-    <button class='sub' bindtap='sub'>提交</button>
-    <view class='xieyi' bindtap='xieyi'>
-      <view class='fl'>提交即代表您已同意</view>
-      <view class='fl xia'>《服务标准及违约责任约定》</view>
-    </view>
+<import src="../nav/nav" />
+<view class='footer'>
+
+<block wx:for="{{bar}}" wx:key=''>
+  <template is="nav" data="{{...item}}" />
+</block>
 </view>
+

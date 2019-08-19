@@ -1,18 +1,20 @@
 var app = getApp();
-var uitl=require('../../utils/util.js')
+var util=require('../../utils/util.js')
 Page({
   /**
    * 页面的初始数据
    */
   data: {
     openid: '',
+    latitude: '',
+    longitude: '',
     get_user: true,
     userInfo: {},
-    ajaxurl:uitl.ajaxurl,
+    ajaxurl: util.ajaxurl,
     wode_tf:false,
     textarea_tf:false,
     t_length:0,
-    bar: ['../image/fabu.png', '../image/dingdan2.png', '../image/wode2.png', '../image/liulan2.png'],
+    bar: ['../image/fabu.png', '../image/dingdan2.png', '../image/wode2.png', '../image/liulan2.png', '../image/map2.png'],
     tit:'',
     dingdan_dian: false,
     yin_box:false,
@@ -59,9 +61,14 @@ Page({
    */
   onLoad: function (options) {
     var that=this
+    var that = this
     var openid = wx.getStorageSync('openid') || ''
-    this.setData({
-      openid: openid
+    var latitude = wx.getStorageSync('latitude') || ''
+    var longitude = wx.getStorageSync('longitude') || ''
+    that.setData({
+      openid: openid,
+      latitude: latitude,
+      longitude: longitude
     })
     if (app.globalData.userInfo.nickName) {
       //console.log(app.globalData.userInfo)
@@ -83,6 +90,7 @@ Page({
   },
   onShow: function () {
     var that = this
+    util.get_title(that)
     if (!that.data.userInfo) {
       that.setData({
         get_user: true
@@ -111,19 +119,7 @@ Page({
       arr_index: 0,
       arr_index2: 0
     })
-    //获取分享标题
-    wx.request({
-      url: 'https://www.uear.net/ajax2/random_text.php',
-      data: {
-      },
-      method: 'GET',
-      success: function (res) {
-        //console.log(res.data.data)
-        that.setData({
-          tit: res.data.data
-        })
-      }
-    })
+    
     //获取标签
     wx.request({
       url: 'https://www.uear.net/ajax2/show_scene.php',
@@ -350,19 +346,9 @@ Page({
       arr_value2: e.detail.value
     })
   },
+  //提交确认
   sub: function () {
     var that=this
-    var time = Date.parse(new Date());
-    if (time - this.data.start_time < 10000){
-      //console.log('频繁点击')
-      return
-
-    }else{
-      that.setData({
-        start_time:time
-      })
-      //console.log('正常')
-    }
     wx.setStorageSync('money', that.data.money)
     var query = wx.createSelectorQuery();
     if (this.data.arr_value == '') {
@@ -512,7 +498,7 @@ Page({
     }
     if (this.data.yaoqiu_value == '') {
       this.setData({
-        sub_box_text: '工作要求不能为空'
+        sub_box_text: '专业要求不能为空'
       })
       query.select('.sub_box').boundingClientRect(function (rect) {
         var left = '-' + rect.width + 'rpx'
@@ -539,36 +525,35 @@ Page({
       }).exec();
       return;
     }
-    
-    if (this.data.day == 0) {
-      this.setData({
-        sub_box_text: '请填写天数'
-      })
-      query.select('.sub_box').boundingClientRect(function (rect) {
-        var left = '-' + rect.width + 'rpx'
-        that.setData({
-          left: left
-        })
-        var animation = wx.createAnimation({
-          duration: 1000,
-        })
-        animation.opacity(0.7).step();
-        that.setData({
-          animation_sub: animation.export()
-        })
-        clearTimeout(timer)
-        var timer = setTimeout(function () {
-          var animation = wx.createAnimation({
-            duration: 1000,
-          })
-          animation.opacity(0).step();
-          that.setData({
-            animation_sub: animation.export()
-          })
-        }, 1000)
-      }).exec();
-      return;
-    }
+    // if (this.data.day == 0) {
+    //   this.setData({
+    //     sub_box_text: '请填写天数'
+    //   })
+    //   query.select('.sub_box').boundingClientRect(function (rect) {
+    //     var left = '-' + rect.width + 'rpx'
+    //     that.setData({
+    //       left: left
+    //     })
+    //     var animation = wx.createAnimation({
+    //       duration: 1000,
+    //     })
+    //     animation.opacity(0.7).step();
+    //     that.setData({
+    //       animation_sub: animation.export()
+    //     })
+    //     clearTimeout(timer)
+    //     var timer = setTimeout(function () {
+    //       var animation = wx.createAnimation({
+    //         duration: 1000,
+    //       })
+    //       animation.opacity(0).step();
+    //       that.setData({
+    //         animation_sub: animation.export()
+    //       })
+    //     }, 1000)
+    //   }).exec();
+    //   return;
+    // }
     var data={
       openid: that.data.openid,
       language: that.data.arr_value,
@@ -577,26 +562,47 @@ Page({
       project_address: that.data.didian_value,
       project_theme: that.data.neirong_value,
       project_skill: that.data.yaoqiu_value,
-      money: that.data.day,
+      money: 7,
       plus_money: that.data.plus_money,
       now_money: that.data.money,
       scene: that.data.names2,
       text: that.data.value
     }
+    wx.showLoading({
+      title: '下单中',
+      mask: true
+    })
     wx.request({
-      url: 'https://www.uear.net/ajax4/release1.php',
+      url: 'https://www.uear.net/ajax4/release2.php',
       data: data,
       method: 'GET',
       success: function (res) {
-        var release_oid = res.data.data.oid
-        wx.setStorageSync('release_oid', release_oid)
+        wx.hideLoading()
         if (res.data.code == 1) {
-          wx.navigateTo({
-            url: '/pages/pay/pay',
+          wx.showToast({
+            title: '下单成功',
+            icon: 'success',
+            mark: true
           })
         }
       }
     })
+    // wx.request({
+    //   url: 'https://www.uear.net/ajax4/release1.php',
+    //   data: data,
+    //   method: 'GET',
+    //   success: function (res) {
+    //     var release_oid = res.data.data.oid
+    //     wx.setStorageSync('release_oid', release_oid)
+    //     if (res.data.code == 1) {
+    //       wx.navigateTo({
+    //         url: '/pages/pay/pay',
+    //       })
+    //     }
+    //   },complete:function(){
+    //     wx.hideLoading()
+    //   }
+    // })
   },
   onPageScroll: function (e) {
     if (e.scrollTop>50){
@@ -628,7 +634,7 @@ Page({
 
 
 
-  
+  //底部导航
   fabu: function () {
     wx.redirectTo({
       url: '/pages/rob/rob',
@@ -637,6 +643,74 @@ Page({
   liulan: function () {
     wx.redirectTo({
       url: '/pages/liulan/liulan',
+    })
+  },
+  map: function () {
+    var that = this
+    wx.getSetting({
+      success(res) {// 查看所有权限
+        //console.log(res)
+        let status = res.authSetting['scope.userLocation']// 查看位置权限的状态，此处为初次请求，所以值为undefined
+        if (!status || that.data.longitude == '') {// 如果是首次授权(undefined)或者之前拒绝授权(false)
+          wx.openSetting({
+            success(data) {
+              if (data.authSetting["scope.userLocation"] == true) {
+                wx.getLocation({ // 请求位置信息
+                  type: 'gcj02',
+                  success(res) {
+                    //console.log(res);
+                    that.setData({
+                      latitude: res.latitude,
+                      longitude: res.longitude
+                    })
+                    wx.setStorageSync('latitude', res.latitude)
+                    wx.setStorageSync('longitude', res.longitude)
+                  }
+                })
+              }
+            }
+          })
+        } else {
+          wx.request({
+            url: 'https://www.uear.net/ajax4/translator_status1.php',
+            data: {
+              openid: that.data.openid
+            },
+            method: 'GET',
+            success: function (res) {
+              if (res.data.code == 0) {
+                if (that.data.longitude == '' || that.data.latitude == '') {
+                  wx.showToast({
+                    title: '请开启手机定位',
+                    icon: 'none',
+                    duration: 2000
+                  })
+                } else {
+                  var data = {
+                    openid: that.data.openid,
+                    flower_imgs: 0,
+                    longitude: that.data.longitude,
+                    latitude: that.data.latitude,
+                    mark: 1
+                  }
+                  wx.request({
+                    url: 'https://www.uear.net/ajax4/translator_flower_submit.php',
+                    data: data,
+                    method: 'GET',
+                    success: function (res) {
+                    },
+                  })
+                }
+              }
+            },
+            complete: function () {
+              wx.redirectTo({
+                url: '/pages/map/map',
+              })
+            }
+          })
+        }
+      }
     })
   },
   dingdan: function () {

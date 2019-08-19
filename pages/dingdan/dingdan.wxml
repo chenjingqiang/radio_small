@@ -200,19 +200,21 @@
   <!-- 底部导航 -->
   <view class='footer clearfix'>
     <button open-type="getUserInfo" id='show-author' bindgetuserinfo="getUserInfo" wx-if="{{get_user}}"></button>
-    <view bindtap='fabu'>
+    <view bindtap='fabu' class="footer_fabu">
       <image src='{{bar[0]}}'></image>
     </view>
-    <view bindtap='liulan'>
+    <view  bindtap='liulan'>
       <image src='{{bar[3]}}'></image>
     </view>
-    <view bindtap='dingdan'>
+    <view bindtap='map' class="footer_map">
+      <image src='{{bar[4]}}'></image>
+    </view>
+    <view bindtap='dingdan' class="footer_fadan">
       <image src='{{bar[1]}}'></image>
     </view>
     <view bindtap='wode'>
       <image src='{{bar[2]}}'></image>
     </view>
-    
   </view>
 </view>
 

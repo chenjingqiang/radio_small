@@ -1,4 +1,5 @@
 // pages/mingxi/mingxi.js
+var util = require("../../utils/util.js")
 Page({
 
   /**
@@ -7,7 +8,8 @@ Page({
   data: {
     openid:'',
     select:[],
-    kong:true
+    kong:true,
+    tit:''
   },
 
   /**
@@ -36,6 +38,7 @@ Page({
    */
   onShow: function () {
     var that=this
+    util.get_title(that)
     wx.request({
       //判断
       url: 'https://www.uear.net/ajax4/show_details1.php',
@@ -88,6 +91,10 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    return {
+      title: this.data.tit,
+      imageUrl: "https://www.uear.net/img2/start.jpg",
+      path: '/pages/start/start',
+    }
   }
 })

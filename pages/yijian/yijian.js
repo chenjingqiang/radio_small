@@ -1,4 +1,5 @@
 // pages/yijian/yijian.js
+var util = require("../../utils/util.js")
 Page({
 
   /**
@@ -35,7 +36,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    var that=this
+    util.get_title(that)
   },
   bind_te:function(e){
     this.setData({
@@ -123,6 +125,10 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    return {
+      title: this.data.tit,
+      imageUrl: "https://www.uear.net/img2/start.jpg",
+      path: '/pages/start/start',
+    }
   }
 })

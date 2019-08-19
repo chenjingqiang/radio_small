@@ -1,0 +1,5 @@
+<template name="nav">
+  <view bindtap='{{fn}}'>
+    <image src="{{ index==0 ? img : img2 }}"></image>
+  </view>
+</template>

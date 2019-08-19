@@ -14,6 +14,7 @@
   <view class='wode_btn3' wx-if="{{code==3}}">
     认证中
   </view>
+  <!-- <button bindtap='aaa'>123</button> -->
   <view class='wode_bor'></view>
   <view class='list'>
     <view class='clearfix' bindtap='go_qianbao'>
@@ -43,13 +44,16 @@
   <!-- 底部导航 -->
   <view class='footer clearfix'>
     <button open-type="getUserInfo" id='show-author' bindgetuserinfo="getUserInfo" wx-if="{{get_user}}"></button>
-    <view bindtap='fabu'>
+    <view bindtap='fabu' class="footer_fabu">
       <image src='{{bar[0]}}'></image>
     </view>
     <view  bindtap='liulan'>
       <image src='{{bar[3]}}'></image>
     </view>
-    <view bindtap='dingdan'>
+    <view bindtap='map' class="footer_map">
+      <image src='{{bar[4]}}'></image>
+    </view>
+    <view bindtap='dingdan' class="footer_fadan">
       <image src='{{bar[1]}}'></image>
     </view>
     <view bindtap='wode'>

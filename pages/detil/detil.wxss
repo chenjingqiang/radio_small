@@ -71,7 +71,6 @@
 .list{
   position: relative;
   padding-top: 30rpx;
-  margin-bottom: 20rpx;
 }
 .year{
   position: absolute;
@@ -137,12 +136,76 @@
   justify-content: center;
   align-items: center;
 }
+.dengji{
+  margin-left: 40rpx;
+  margin-bottom: 40rpx;
+}
+.grade_num{
+  font-size: 24rpx;
+  color: #F3AD1E;
+  margin-right: 4rpx;
+}
+.grade_name{
+  font-size: 26rpx;
+  color: #8A8BF6;
+}
+.dengjitiao{
+  position: relative;
+  margin-top: 11rpx;
+}
+.dj_bottom{
+  width: 160rpx;
+  height: 12rpx;
+  background: #D8D8D8;
+  border-radius: 6rpx;
+}
+.dj_top{
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  height: 12rpx;
+  background: #8A8BF6;
+  border-radius: 6rpx;
+}
+.photoUrls{
+  width: 700rpx;
+}
+.photoUrls image{
+  width: 154rpx;
+  height: 154rpx;
+  margin-right: 18rpx;
+}
 .list_r{
   width: 470rpx;
 }
 .name{
   font-size: 34rpx;
   color: #333333;
+}
+.peo{
+  font-size: 24rpx;
+  color: #999999;
+  margin-left: 40rpx;
+  margin-top: 8rpx;
+}
+.peo image{
+  width: 30rpx;
+  height: 20rpx;
+  margin-right: 6rpx;
+}
+.l_l{
+  margin-top: 18rpx;
+  height: 44rpx;
+  font-size: 24rpx;
+  color: #999999;
+  display: flex;
+  align-items: center;
+}
+.l_l image{
+  width: 19rpx;
+  height: 24rpx;
+  margin-right: 12rpx;
 }
 .add{
   height: 44rpx;
@@ -155,18 +218,6 @@
   color: #999;
   text-align: center;
   line-height: 44rpx;
-}
-.peo{
-  margin-top: 18rpx;
-  height: 44rpx;
-  font-size: 24rpx;
-  color: #999999;
-  line-height: 44rpx;
-}
-.peo image{
-  width: 30rpx;
-  height: 20rpx;
-  margin-right: 5rpx;
 }
 .biaoqian{
   width: 500rpx;
@@ -240,16 +291,59 @@
 .con .bor{
   margin-top: 20rpx;
 }
-.list_sub{
+.foot_fix{
   position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
   height: 100rpx;
-  background: #8A8BF6;
+}
+.list_sub{
+  width: 510rpx;
+  background: #73CC89;
   text-align: center;
   line-height: 100rpx;
   font-size: 34rpx;
   color: #FFFFFF;
-  margin-top: 80rpx;
+}
+.foot_fix button{
+}
+.foot_fix image{
+  width: 240rpx;
+  height: 100rpx;
+}
+.hua{
+  margin-bottom: 38rpx;
+}
+.hua image{
+  width: 66rpx;
+  height: 66rpx;
+  border: 2rpx solid #5A85E7;
+  border-radius: 50%;
+  margin-right: 15rpx;
+}
+.hua text{
+  font-size: 26rpx;
+  line-height: 66rpx;
+  margin-right: 50rpx;
+  color: #4764bf;
+}
+.mp3{
+  width: 670rpx;
+  height: 80rpx;
+  margin: 0 auto;
+  background: #71C987;
+  border-radius: 40rpx;
+  display: flex;
+  align-items: center;
+}
+.mp3 image{
+  width: 25rpx;
+  height: 47rpx;
+  margin-left: 40rpx;
+  margin-right: 270rpx;
+}
+.mp3 text{
+  font-size: 30rpx;
+  color: #FFFFFF;
 }

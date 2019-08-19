@@ -1,4 +1,5 @@
 // pages/change_wx/change_wx.js
+var util = require("../../utils/util.js")
 Page({
 
   /**
@@ -34,6 +35,7 @@ Page({
 
   onShow: function () {
     var that=this
+    util.get_title(that)
     wx.request({
       //判断
       url: 'https://www.uear.net/ajax4/get_wxid.php',
@@ -125,6 +127,10 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    return {
+      title: this.data.tit,
+      imageUrl: "https://www.uear.net/img2/start.jpg",
+      path: '/pages/start/start',
+    }
   }
 })

@@ -1,6 +1,8 @@
 
 <view class='release'>
   <view class='yinying' wx-if="{{!yinying}}" catchtouchmove='true'></view>
+  <image src="../image/rod_qp.png" class="rob_qp" bindtap="change_rob_qp" wx-if="{{rob_qp_tf==0}}"></image>
+  <!-- 填写联系方式弹窗 -->
   <view class='tanchuang_weixin' catchtouchmove='true' wx-if="{{!t_f2}}">
     <image src='../image/guanbi.png' class='tanchuang_weixin_close' bindtap='tanchuang_weixin_close'></image>
     <view class='tw_tit'>
@@ -14,6 +16,7 @@
       提交
     </view>
   </view>
+  <!-- 查看联系方式弹窗 -->
   <view class='tanchuang' wx-if="{{!t_f}}" catchtouchmove='true'>
     <image class='x' src='/pages/image/guanbi2.png' bindtap='change_wxid'></image>
     <view class='tt_tit'>
@@ -28,18 +31,23 @@
       复制联系方式
     </view>
   </view>
+  <!-- 认证翻译官弹窗 -->
+  <view class='tanchuang3' wx-if="{{!t_f3}}" catchtouchmove='true'>
+    <image class='x' src='/pages/image/guanbi3.png' bindtap='change_tanchuang3'></image>
+    <text class="t1">使用此功能</text>
+    <text>您需认证成为翻译官</text>
+    <button open-type="getUserInfo" id='show-author2' bindgetuserinfo="getUserInfo"  wx-if="{{get_user}}" ></button>
+    <view bindtap="go_renzheng">
+      前往认证翻译官
+    </view>
+  </view>
+
   <image class='shuaxin' src='../image/shuaxin.png' bindtap='shuaxin'></image>
   <view class='title clearfix'>
     <view bindtap='translate'>
     </view>
     <view bindtap='release'>
     </view>
-  </view>
-  <view class='shibai' animation="{{animation_shibai}}">
-    手速太慢被其他人抢到啦，试试其他单吧
-  </view>
-  <view class='shibai2' animation="{{animation_shibai2}}">
-    存在未完成的订单
   </view>
   <view class='zaixian'>
     <image src='../image/zaixian.png'></image>
@@ -155,13 +163,16 @@
   <!-- 底部导航 -->
   <view class='footer clearfix'>
     <button open-type="getUserInfo" id='show-author' bindgetuserinfo="getUserInfo" wx-if="{{get_user}}"></button>
-    <view bindtap='fabu'>
+    <view bindtap='fabu' class="footer_fabu">
       <image src='{{bar[0]}}'></image>
     </view>
     <view  bindtap='liulan'>
       <image src='{{bar[3]}}'></image>
     </view>
-    <view bindtap='dingdan'>
+    <view bindtap='map' class="footer_map">
+      <image src='{{bar[4]}}'></image>
+    </view>
+    <view bindtap='dingdan' class="footer_fadan">
       <image src='{{bar[1]}}'></image>
     </view>
     <view bindtap='wode'>

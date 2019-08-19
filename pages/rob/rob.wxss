@@ -4,6 +4,14 @@
   padding-top: 110rpx;
   padding-bottom: 110rpx;
 }
+.rob_qp{
+  position: fixed;
+  top: 0;
+  right: 0rpx;
+  width: 453rpx;
+  height: 132rpx;
+  z-index: 100;
+}
 .yinying{
   position: fixed;
   top: 0;
@@ -71,6 +79,58 @@
   margin-top: 87rpx;
   line-height: 70rpx;
   font-weight: bold;
+}
+.tanchuang3{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 20;
+  margin-left: -280rpx;
+  margin-top: -315rpx;
+  width: 560rpx;
+  height: 630rpx;
+  border-radius: 24rpx;
+  text-align: center;
+  background: url('https://www.uear.net/img3/background1.png') no-repeat center;
+  background-size: 100% 100%;
+}
+.tanchuang3 .x{
+  position: absolute;
+  top: 0rpx;
+  right: 0rpx;
+  z-index: 30;
+  width: 96rpx;
+  height: 96rpx;
+}
+.tanchuang3 .t1{
+  margin-top: 350rpx;
+}
+.tanchuang3 text{
+  display: block;
+  font-size: 32rpx;
+  color: #333333;
+  text-align: center;
+  margin-bottom: 20rpx;
+}
+.tanchuang3 view{
+  width: 400rpx;
+  height: 74rpx;
+  font-size: 32rpx;
+  color: #FFFFFF;
+  background: #7782F3;
+  border-radius: 35rpx;
+  margin: 0 auto;
+  margin-top: 35rpx;
+  line-height: 74rpx;
+}
+#show-author2{
+  position: absolute;
+  top: 488rpx;
+  left: 50%;
+  margin-left: -200rpx;
+  width: 400rpx;
+  height: 74rpx;
+  opacity: 0;
 }
 .tanchuang{
   position: fixed;
@@ -157,7 +217,7 @@
   position: fixed;
   right: 42rpx;
   top: 817rpx;
-  z-index:2;
+  z-index:4;
   width: 84rpx;
   height: 84rpx;
 }

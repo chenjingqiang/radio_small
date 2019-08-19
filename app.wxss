@@ -1,6 +1,13 @@
 
+button{
+  border:none;
+  border-radius:0;
+  padding: 0;
+}
 button::after{
   border:none;
+  border-radius:0;
+  padding: 0;
 }
 input{
   outline:none;
@@ -10,6 +17,7 @@ input{
 .fl{
   float: left;
 }
+
 .fr{
   float: right;
 }
@@ -22,6 +30,7 @@ input{
 }
 
 /* 底部导航 */
+
 .footer{
   position: fixed;
   left: 0;
@@ -34,7 +43,6 @@ input{
 }
 .footer view{
   float: left;
-  width: 25%;
   height: 106rpx;
   text-align: center;
 }
@@ -42,6 +50,14 @@ input{
   width: 75rpx;
   height: 68rpx;
   margin-top: 18rpx;
+}
+.footer .footer_fabu{
+  margin-left: 40rpx;
+  margin-right: 70rpx;
+}
+.footer .footer_fabu{
+  margin-left: 40rpx;
+  margin-right: 70rpx;
 }
 .footer .dingdan_dian{
   width: 20rpx;
@@ -52,9 +68,19 @@ input{
   top: 14rpx;
   left: 384rpx;
 }
-
+.footer .footer_map{
+  margin: 0 77rpx;
+}
+.footer .footer_map image{
+  width: 84rpx;
+  height: 116rpx;
+  margin-top: -30rpx;
+}
+.footer .footer_fadan{
+  margin-right: 70rpx;
+}
 #show-author{
-  width: 25%;
+  width: 150rpx;
   height: 110rpx;
   position: absolute;
   right: 0;

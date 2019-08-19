@@ -14,50 +14,54 @@ Page({
    */
   onLoad: function (options) {
     var openid = wx.getStorageSync('openid') || ''
-    // console.log(1)
-    // console.log(openid)
     if (openid==''){
       app.getToken().then((resArg) => {
-        // console.log(resArg)
-        // console.log(1)
+        if (options.detil_id){
+          wx.setStorageSync('detil_id', options.detil_id)
+          wx.setStorageSync('share_detil', true)
+          wx.navigateTo({
+            url: '/pages/detil/detil',
+          })
+        }else{
+          wx.redirectTo({
+            url: '/pages/rob/rob',
+          })
+        }
+        
+      })
+    }else{
+      if (options.detil_id) {
+        wx.setStorageSync('detil_id', options.detil_id)
+        wx.setStorageSync('share_detil', true)
+        wx.navigateTo({
+          url: '/pages/detil/detil',
+        })
+      } else {
         wx.redirectTo({
           url: '/pages/rob/rob',
         })
-      })
-    }else{
-      //console.log(2)
-      wx.redirectTo({
-        url: '/pages/rob/rob',
-      })
+      }
     }
-    // var openid = wx.getStorageSync('openid')||''
-    // console.log(openid)
-    // if (openid!=''){
+    
+  },
+  onShow: function () {
+    // var openid = wx.getStorageSync('openid') || ''
+    // // console.log(2)
+    // // console.log(openid)
+    // if (openid == '') {
+    //   app.getToken().then((resArg) => {
+    //     // console.log(resArg)
+    //     // console.log(1)
+    //     wx.redirectTo({
+    //       url: '/pages/rob/rob',
+    //     })
+    //   })
+    // } else {
+    //   //console.log(2)
     //   wx.redirectTo({
     //     url: '/pages/rob/rob',
     //   })
     // }
-   
-    
-  },
-  onShow: function () {
-    var openid = wx.getStorageSync('openid') || ''
-    // console.log(2)
-    // console.log(openid)
-    if (openid == '') {
-      app.getToken().then((resArg) => {
-        // console.log(resArg)
-        // console.log(1)
-        wx.redirectTo({
-          url: '/pages/rob/rob',
-        })
-      })
-    } else {
-      //console.log(2)
-      wx.redirectTo({
-        url: '/pages/rob/rob',
-      })
-    }
     
   },
 

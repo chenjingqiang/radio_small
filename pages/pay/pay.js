@@ -1,4 +1,5 @@
 // pages/pay/pay.js
+var util = require("../../utils/util.js")
 Page({
 
   /**
@@ -38,6 +39,7 @@ Page({
    */
   onShow: function () {
     var that=this
+    util.get_title(that)
     var money=wx.getStorageSync('money') || ''
     var release_oid = wx.getStorageSync('release_oid') || ''
     that.setData({
@@ -279,6 +281,10 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    return {
+      title: this.data.tit,
+      imageUrl: "https://www.uear.net/img2/start.jpg",
+      path: '/pages/start/start',
+    }
   }
 })

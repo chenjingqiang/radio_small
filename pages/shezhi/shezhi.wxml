@@ -1,0 +1,25 @@
+<!--pages/shezhi/shezhi.wxml-->
+<view class="shezhi">
+  <view class="tit clearfix">
+    <view class="fl">
+      开启按图索译
+    </view>
+    <image src="{{shezhi_tf ? '/pages/image/shezhi_kai.png' : '/pages/image/shezhi_guan.png'}}" class="fr" bindtap="change_shezhi"></image>
+  </view>
+  <view class="bor">
+  </view>
+  <view class="con">
+    <view class="tt">
+      请选择您最擅长的一种语言
+    </view>
+    <view class="list_fu">
+      <view class="list" wx:for="{{imgs}}" wx:key="index" data-id="{{item.id}}" bindtap="click_img">
+        <image src="{{item.img}}" class="{{item.status ? '' : 'bold'}}"></image>
+        <view>{{item.name}}</view>
+      </view>
+    </view>
+  </view>
+  <view class="sub2" bindtap="sub">
+    完成
+  </view>
+</view>

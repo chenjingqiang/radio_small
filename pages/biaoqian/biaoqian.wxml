@@ -1,0 +1,14 @@
+<!--pages/biaoqian/biaoqian.wxml-->
+<view class="biaoqian">
+  <view class='fus clearfix'>
+    <view class="{{item.mark==true ? '' : 'biaoqian_class'}}" wx:for="{{biaoqian_select}}" wx:key="index" bindtap='biaoqian_click' data-name='{{item.name}}' data-mark='{{item.mark}}' data-index='{{index}}'>{{item.name}}</view>
+  </view>
+  <view class="sub">
+    <view class="fl sub_l" bindtap="chongzhi">
+      重置
+    </view>
+    <view class="fl sub_r" bindtap="sub">
+      确定
+    </view>
+  </view>
+</view>

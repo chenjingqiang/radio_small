@@ -1,6 +1,6 @@
 // pages/dingdan/dingdan.js
 var app = getApp();
-var aj = require("../../utils/util.js");
+var util = require("../../utils/util.js");
 Page({
 
   /**
@@ -8,6 +8,8 @@ Page({
    */
   data: {
     openid: '',
+    latitude:'',
+    longitude:'',
     get_user: true,
     userInfo: {},
     kong:false,
@@ -23,7 +25,7 @@ Page({
     yinying_tuidan:false,
     yinying_tuidan2:false,
     yinying_jieshoutuidan: false,
-    bar: ['../image/fabu2.png', '../image/dingdan.png', '../image/wode2.png', '../image/liulan2.png'],
+    bar: ['../image/fabu2.png', '../image/dingdan.png', '../image/wode2.png', '../image/liulan2.png', '../image/map2.png'],
     wode_tf: false,
     textarea_tf: true,
     tit:'',
@@ -35,12 +37,17 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var that=this
     wx.setNavigationBarTitle({
       title: '发单记录'
     })
-    var openid=wx.getStorageSync('openid')||''
-    this.setData({
-      openid:openid
+    var openid = wx.getStorageSync('openid') || ''
+    var latitude = wx.getStorageSync('latitude') || ''
+    var longitude = wx.getStorageSync('longitude') || ''
+    that.setData({
+      openid: openid,
+      latitude: latitude,
+      longitude: longitude
     })
     if (app.globalData.userInfo.nickName) {
       //console.log(app.globalData.userInfo)
@@ -71,6 +78,7 @@ Page({
    */
   onShow: function () {
     var that=this
+    util.get_title(that)
     that.setData({
       yinying: false,
       yinying_tuidan: false,
@@ -100,19 +108,7 @@ Page({
         }
       }
     })
-    wx.request({
-      //判断
-      url: 'https://www.uear.net/ajax2/random_text.php',
-      data: {
-      },
-      method: 'GET',
-      success: function (res) {
-        //console.log(res.data.data)
-        that.setData({
-          tit: res.data.data
-        })
-      }
-    })
+    
     //获取求译状态
     wx.request({
       url: 'https://www.uear.net/ajax2/check_success.php',
@@ -231,6 +227,74 @@ Page({
   liulan: function () {
     wx.redirectTo({
       url: '/pages/liulan/liulan',
+    })
+  },
+  map: function () {
+    var that = this
+    wx.getSetting({
+      success(res) {// 查看所有权限
+        //console.log(res)
+        let status = res.authSetting['scope.userLocation']// 查看位置权限的状态，此处为初次请求，所以值为undefined
+        if (!status || that.data.longitude == '') {// 如果是首次授权(undefined)或者之前拒绝授权(false)
+          wx.openSetting({
+            success(data) {
+              if (data.authSetting["scope.userLocation"] == true) {
+                wx.getLocation({ // 请求位置信息
+                  type: 'gcj02',
+                  success(res) {
+                    //console.log(res);
+                    that.setData({
+                      latitude: res.latitude,
+                      longitude: res.longitude
+                    })
+                    wx.setStorageSync('latitude', res.latitude)
+                    wx.setStorageSync('longitude', res.longitude)
+                  }
+                })
+              }
+            }
+          })
+        } else {
+          wx.request({
+            url: 'https://www.uear.net/ajax4/translator_status1.php',
+            data: {
+              openid: that.data.openid
+            },
+            method: 'GET',
+            success: function (res) {
+              if (res.data.code == 0) {
+                if (that.data.longitude == '' || that.data.latitude == '') {
+                  wx.showToast({
+                    title: '请开启手机定位',
+                    icon: 'none',
+                    duration: 2000
+                  })
+                } else {
+                  var data = {
+                    openid: that.data.openid,
+                    flower_imgs: 0,
+                    longitude: that.data.longitude,
+                    latitude: that.data.latitude,
+                    mark: 1
+                  }
+                  wx.request({
+                    url: 'https://www.uear.net/ajax4/translator_flower_submit.php',
+                    data: data,
+                    method: 'GET',
+                    success: function (res) {
+                    },
+                  })
+                }
+              }
+            },
+            complete: function () {
+              wx.redirectTo({
+                url: '/pages/map/map',
+              })
+            }
+          })
+        }
+      }
     })
   },
   dingdan: function () {

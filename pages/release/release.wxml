@@ -75,7 +75,9 @@
       {{value2}}
     </view>
   </view>
+  
   <view class='bor'></view>
+  <!-- 
   <view class='fus clearfix' style="padding-top:0;">
     <view class='type_zi'>
       发布时长
@@ -96,9 +98,9 @@
   </view>
   <view class='shangjin_tishi clearfix'>
     <text class='l'>赏金越高订单排名越靠前</text>
-    <!-- <text class='r'>（不能低于{{zuidi_money}}元）</text> -->
-  </view>
+  </view> 
   <view class='bor'></view>
+  -->
   <view class='sub_fu clearfix'>
     <view class='l'>
       平台费用：<text>{{money}}元</text> 
@@ -133,16 +135,17 @@
   <!-- 底部导航 -->
   <view class='footer clearfix'>
     <button open-type="getUserInfo" id='show-author' bindgetuserinfo="getUserInfo" wx-if="{{get_user}}"></button>
-    <view bindtap='fabu'>
+    <view bindtap='fabu' class="footer_fabu">
       <image src='{{bar[0]}}'></image>
     </view>
-    <view bindtap='liulan'>
+    <view  bindtap='liulan'>
       <image src='{{bar[3]}}'></image>
     </view>
-    <view bindtap='dingdan'>
+    <view bindtap='map' class="footer_map">
+      <image src='{{bar[4]}}'></image>
+    </view>
+    <view bindtap='dingdan' class="footer_fadan">
       <image src='{{bar[1]}}'></image>
-      <view class='dingdan_dian' wx-if="{{dingdan_dian}}">
-      </view>
     </view>
     <view bindtap='wode'>
       <image src='{{bar[2]}}'></image>

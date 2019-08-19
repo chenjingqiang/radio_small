@@ -1,16 +1,19 @@
 var app = getApp();
+var util = require("../../utils/util.js")
 Page({
   /**
    * 页面的初始数据
    */
   data: {
     openid: '',
+    latitude: '',
+    longitude: '',
     get_user:true,
     userInfo:{},
     wode_tf:false,
     textarea_tf:true,
     t_length:0,
-    bar: ['../image/fabu.png', '../image/dingdan2.png', '../image/wode2.png','../image/liulan2.png'],
+    bar: ['../image/fabu.png', '../image/dingdan2.png', '../image/wode2.png', '../image/liulan2.png', '../image/map2.png'],
     tit:'',
     dingdan_dian: false,
     height:'',
@@ -19,18 +22,19 @@ Page({
     order_status: 0,
     select:[],
     fu_id:'',
-    animation_shibai:'',
-    animation_shibai2: '',
     kong: false,
     index:0,
     status_t_f:false,
     yinying:true,
     t_f:true,
     t_f2:true,
+    t_f3: true,
     page:1,
     zaixian:0,
     wxid_true:false,
-    wxid_value:''
+    wxid_value:'',
+    type:false,
+    rob_qp_tf:1
   },
 
   /**
@@ -39,10 +43,22 @@ Page({
   onLoad: function (options) {
     var that=this
     var openid = wx.getStorageSync('openid') || ''
-    this.setData({
-      openid: openid
+    wx.getLocation({ // 请求位置信息
+      type: 'gcj02',
+      success(res) {
+        //console.log(res);
+        that.setData({
+          latitude: res.latitude,
+          longitude: res.longitude
+        })
+        wx.setStorageSync('latitude', res.latitude)
+        wx.setStorageSync('longitude', res.longitude)
+      }
+    }) 
+    that.setData({
+      openid: openid,
     })
-    //console.log(openid)
+    // console.log(openid)
     if (app.globalData.userInfo.nickName) {
       //console.log(app.globalData.userInfo)
       this.setData({
@@ -93,11 +109,23 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    var that = this
     wx.showLoading({
       title: '加载中',
       mask:true
     })
-    var that = this
+    util.get_title(that)
+    var rob_qp_tf = wx.getStorageSync('rob_qp_tf') || 0
+    //0显示 1消失
+    if (rob_qp_tf==0 ) {
+      that.setData({
+        rob_qp_tf: 0,
+      })
+    } else {
+      that.setData({
+        rob_qp_tf: 1,
+      })
+    }
     //初始动画
     var animation = wx.createAnimation({
       duration: 100,
@@ -114,7 +142,29 @@ Page({
       kong:false,
       yinying: true,
       t_f2: true,
+      t_f3: true,
       wxid_true:false
+    })
+    //获取翻译官状态
+    wx.request({
+      url: 'https://www.uear.net/ajax4/translator_status.php',
+      data: {
+        openid: this.data.openid
+      },
+      method: 'GET',
+      success: function (res) {
+        //console.log(res.data)
+        
+        if (res.data.code == 0) {
+          that.setData({
+            type: false,
+          })
+        } else {
+          that.setData({
+            type: true
+          })
+        }
+      },
     })
     //获取用户是否填写微信号
     wx.request({
@@ -124,7 +174,6 @@ Page({
       },
       method: 'GET',
       success: function (res) {
-        //console.log(res)
         that.setData({
           wxid_true: res.data.data
         })
@@ -141,19 +190,6 @@ Page({
         //console.log(res.data.data)
         that.setData({
           zaixian: res.data.data
-        })
-      }
-    })
-    //分享标题
-    wx.request({
-      url: 'https://www.uear.net/ajax2/random_text.php',
-      data: {
-      },
-      method: 'GET',
-      success: function (res) {
-        //console.log(res.data.data)
-        that.setData({
-          tit:res.data.data
         })
       }
     })
@@ -186,7 +222,7 @@ Page({
   },
   //下拉动画
   gettextHeight: function (e) {
-    if (this.data.wxid_true) {
+    if (this.data.type) {
       if (e.currentTarget.dataset.text_mark) {
         var that = this
         var fu_id = e.currentTarget.dataset.oid
@@ -218,11 +254,24 @@ Page({
     } else {
       this.setData({
         yinying: false,
-        t_f2: false
+        t_f3:false
       })
     }
     
     
+  },
+  //去认证
+  go_renzheng:function(){
+    wx.navigateTo({
+      url: '/pages/become/become',
+    })
+  },
+  //更改抢单气泡
+  change_rob_qp:function(){
+    wx.setStorageSync('rob_qp_tf', 1)
+    this.setData({
+      rob_qp_tf:1
+    })
   },
   getUserInfo: function () {
     var that = this
@@ -297,16 +346,30 @@ Page({
   },
   ckwxid:function(e){
     var wx_id = e.currentTarget.dataset.wx_id
-    this.setData({
-      yinying: false,
-      t_f:false,
-      weixin:wx_id
-    })
+    if(this.data.type){
+      this.setData({
+        yinying: false,
+        t_f: false,
+        weixin: wx_id
+      })
+    }else{
+      this.setData({
+        yinying: false,
+        t_f3: false
+      })
+    }
+    
   },
   change_wxid:function(){
     this.setData({
       yinying: true,
       t_f: true
+    })
+  },
+  change_tanchuang3: function () {
+    this.setData({
+      yinying: true,
+      t_f3: true
     })
   },
   fuzhi: function () {
@@ -349,6 +412,81 @@ Page({
       url: '/pages/liulan/liulan',
     })
   },
+  map: function () {
+    var that = this
+    if (this.data.wxid_true) {
+      wx.getSetting({
+        success(res) {// 查看所有权限
+          //console.log(res)
+          let status = res.authSetting['scope.userLocation']// 查看位置权限的状态，此处为初次请求，所以值为undefined
+          if (!status||that.data.longitude=='') {// 如果是首次授权(undefined)或者之前拒绝授权(false)
+            wx.openSetting({
+              success(data) {
+                if (data.authSetting["scope.userLocation"] == true) {
+                  wx.getLocation({ // 请求位置信息
+                    type: 'gcj02',
+                    success(res) {
+                      //console.log(res);
+                      that.setData({
+                        latitude: res.latitude,
+                        longitude: res.longitude
+                      })
+                      wx.setStorageSync('latitude', res.latitude)
+                      wx.setStorageSync('longitude', res.longitude)
+                    }
+                  })
+                }
+              }
+            })
+          } else {
+            wx.request({
+              url: 'https://www.uear.net/ajax4/translator_status1.php',
+              data: {
+                openid: that.data.openid
+              },
+              method: 'GET',
+              success: function (res) {
+                if (res.data.code == 0) {
+                  if (that.data.longitude == '' || that.data.latitude == '') {
+                    wx.showToast({
+                      title: '请开启手机定位',
+                      icon: 'none',
+                      duration: 2000
+                    })
+                  } else {
+                    var data = {
+                      openid: that.data.openid,
+                      flower_imgs: 0,
+                      longitude: that.data.longitude,
+                      latitude: that.data.latitude,
+                      mark: 1
+                    }
+                    wx.request({
+                      url: 'https://www.uear.net/ajax4/translator_flower_submit.php',
+                      data: data,
+                      method: 'GET',
+                      success: function (res) {
+                      },
+                    })
+                  }
+                }
+              },
+              complete:function(){
+                wx.redirectTo({
+                  url: '/pages/map/map',
+                })
+              }
+            })
+          }
+        }
+      })
+    } else {
+      this.setData({
+        yinying: false,
+        t_f2: false
+      })
+    }
+  },
   dingdan: function () {
     if(this.data.wxid_true){
       wx.redirectTo({
@@ -379,6 +517,15 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
+    this.setData({
+      page: 1,
+      select: [],
+      kong: false,
+      yinying: true,
+      t_f2: true,
+      t_f3: true,
+      wxid_true: false
+    })
   },
 
   /**
@@ -399,6 +546,10 @@ Page({
    */
   onReachBottom: function () {
     //console.log('触发')
+    wx.showLoading({
+      title: '加载中',
+      mask: true
+    })
     var that=this
     var page = that.data.page+1
     that.setData({
@@ -419,6 +570,9 @@ Page({
           select: that.data.select.concat(res.data.data)
         })
         //console.log('成功')
+      },
+      complete: function () {
+        wx.hideLoading()
       }
     })
 
@@ -431,6 +585,5 @@ Page({
       imageUrl: "https://www.uear.net/img2/start.jpg",
       path: '/pages/start/start',
     }
-    
   },
 })

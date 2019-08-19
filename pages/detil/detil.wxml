@@ -22,7 +22,7 @@
        </view>
       <view class='clearfix'>
         <view class='fl'>
-          <image src='{{wx_img}}' class='touxiang'></image>
+          <image src='{{wx_img}}' class='touxiang' bindtap='previewImg'></image>
           <view class='sex'  wx-if="{{nan_nv=='女'}}">
             <image src='../image/nv_m.png'></image>
             {{age}}岁
@@ -31,18 +31,34 @@
             <image src='../image/nan_m.png'></image>
             {{age}}岁
           </view>
+          <view class="dengji">
+            <view>
+              <text class="grade_num">{{grade_num}}</text>
+              <text class="grade_name">{{grade_name}}</text>
+            </view>
+            <view class="dengjitiao">
+              <view class="dj_top" style="width:{{dj_top}}"></view>
+              <view class="dj_bottom"></view>
+            </view>
+          </view>
         </view>
         <view class='fl list_r'>
-          <view class='name'>
+          <view class='clearfix'>
+            <view class="name fl">
               {{name}}
+            </view>
+            <view class='peo fl'>
+              <image src='../image/peo.png'></image>
+              {{browse}}次浏览
+            </view>
           </view>
           <view class='clearfix'>
             <view class='add fl'>
               {{add1}}·{{add2}}
             </view>
-            <view class='peo fr'>
-                <image src='../image/peo.png'></image>
-                {{browse}}次浏览
+            <view class='l_l fr' wx-if="{{distance}}">
+                <image src='../image/l_l.png'></image>
+                {{distance}}
             </view>
           </view>
           <view class='biaoqian clearfix'>
@@ -56,13 +72,36 @@
               {{item}}
             </view>
           </view>
+          <view class=" hua clearfix" wx-if="{{flower!=''}}" >
+            <view wx:for="{{flower}}" wx:key="index" class="fl">
+              <image src="{{item.img}}" class="fl"></image>
+              <text class="fl">{{item.name}}</text>
+            </view>
+          </view>
         </view>
       </view>
-      
     </view>
     <view class='bor'>
     </view>
     <view class='con'>
+      <view class='tit' wx-if="{{tempFilePath}}">
+        才艺展示
+      </view>
+      <view class="mp3" bindtap="play" wx-if="{{tempFilePath}}">
+        <image src='/pages/image/laba.png' wx-if="{{show_dong}}"></image>
+        <image src='/pages/image/laba.gif' wx-if="{{!show_dong}}"></image>
+        <text>{{miao}}``</text>
+      </view>
+      <view class='bor' wx:if="{{tempFilePath}}">
+      </view>
+      <view class='tit' wx-if="{{photoUrl!=''}}">
+        照片墙
+      </view>
+      <view class="photoUrls" wx-if="{{photoUrl!=''}}">
+        <image wx:for="{{photoUrl}}" wx:key="index" src="{{item}}" bindtap='previewImg2' data-imgindex="{{photoUrl[index]}}"></image>
+      </view>
+      <view class='bor' wx-if="{{photoUrl!=''}}">
+      </view>
       <view class='tit'>
         最高学历
       </view>
@@ -96,8 +135,19 @@
         {{jingli}}
       </view>
     </view>
-    <view class='list_sub' bindtap='ckwxid'>
-        查看联系方式
+    <view class="foot_fix">
+      <view class='list_sub fl' bindtap='ckwxid'>
+          查看联系方式
+      </view>
+      <button open-type="share" >
+        <image src="../image/zhuanfa.png"></image>
+      </button>
+      
+      <!-- <button>
+        转发
+      </button> -->
+      
     </view>
+    
 
 </view>

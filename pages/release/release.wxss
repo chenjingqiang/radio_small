@@ -398,6 +398,8 @@
   color: #333333;
   margin-top: 30rpx;
   text-align: center;
+  position: relative;
+  z-index: 1;
 }
 .lange .zhuanhuan{
   width: 27rpx;

@@ -1,0 +1,53 @@
+/* pages/biaoqian/biaoqian.wxss */
+
+.biaoqian{
+
+}
+.fus{
+  margin-left: 60rpx;
+  margin-top: 50rpx;
+}
+.fus view{
+  box-sizing: border-box;
+  float: left;
+  width: 134rpx;
+  height: 60rpx;
+  text-align: center;
+  line-height: 60rpx;
+  font-size: 30rpx;
+  color: #999999;
+  margin-bottom: 30rpx;
+  margin-right:32rpx;
+  border: 2rpx solid #CCCCCC;
+  border-radius: 6rpx;
+}
+.fus .biaoqian_class{
+  background: #799DF1;
+  color: #fff;
+}
+
+.sub{
+  width: 670rpx;
+  position: fixed;
+  bottom: 60rpx;
+  left: 50%;
+  margin-left: -335rpx;
+}
+.sub view{
+  box-sizing: border-box;
+  width: 335rpx;
+  height: 80rpx;
+  text-align: center;
+  line-height: 80rpx;
+  font-size: 28rpx;
+}
+.sub_l{
+  border: 2rpx solid #799DF1;
+  border-radius: 100rpx 0px 0px 100rpx;
+  color: #799DF1;
+}
+.sub_r{
+  background: #799DF1;
+  border-radius: 0px 100rpx 100rpx 0px;
+  color: #FFFFFF;
+}

@@ -1,6 +1,7 @@
 <!--pages/liulan/liulan.wxml-->
 
 <view class='liulan'>
+  <image src="../image/search_kong.jpg" class="search_kong" wx-if="{{search_kong}}"></image>
   <view class='yinying' wx-if="{{!yinying}}" catchtouchmove='true'></view>
   <view class='tanchuang_weixin' catchtouchmove='true' wx-if="{{!t_f2}}">
     <image src='../image/guanbi.png' class='tanchuang_weixin_close' bindtap='tanchuang_weixin_close'></image>
@@ -13,6 +14,20 @@
     </view>
     <view class='sub' bindtap='wxid_sub'>
       提交
+    </view>
+  </view>
+  <view class="search clearfix">
+    <view class="sou_fu fl">
+      <image class="fl" src='../image/s_serch.png'></image>
+      <input class="fl" placeholder="搜索译员昵称、语言" value="{{value}}"  bindblur="get_value"></input>
+      <image class="fl xx" src='../image/se_x.png' bindtap="qingkong"></image>
+    </view>
+    <image class="fl" src='../image/s_paixu.png' bindtap="change_sort_status_tf"></image>
+    <image class="fl" src='../image/s_biaoqian.png' bindtap="go_biaoqian"></image>
+    <view class="paixu_xuankuang" wx-if="{{!sort_status_tf}}">
+      <view bindtap="dengji" class="{{sort_status==1 ? 'act': ''}}">翻译等级从高到低</view>
+      <view style="border-top: 1px solid #CCCCCC;border-bottom: 1px solid #CCCCCC;" bindtap="liulanliang" class="{{sort_status==2 ? 'act': ''}}">浏览量从高到低</view>
+      <view bindtap="juli" class="{{sort_status==3 ? 'act': ''}}">距离从近到远</view>
     </view>
   </view>
   <view class='list_fu'>
@@ -32,41 +47,61 @@
             <image src='../image/nan_m.png'></image>
             {{item.wx_age}}岁
           </view>
+          <view class="dengji">
+            <view>
+              <text class="grade_num">{{item.grade_num}}</text>
+              <text class="grade_name">{{item.grade_name}}</text>
+            </view>
+            <view class="dengjitiao">
+              <view class="dj_top" style="width:{{(item.integral / item.integral_max) * 160}}rpx"></view>
+              <view class="dj_bottom"></view>
+            </view>
+          </view>
         </view>
         <view class='fl list_r'>
-          <view class='name'>
-              {{item.wx_name}}
+          <view class='name clearfix'>
+            <view class="fl">
+              <text wx:for="{{item.wx_name}}"  wx:for-item="name_list" wx:key="{{index}}" class="{{name_list.status==1? 'red': ''}}">{{name_list.name}}</text>
+            </view>
+            <view class="fl hua" wx-if="{{item.flower_imgs}}" >
+              <image src="{{list}}" class="fl" wx:for="{{item.flower_imgs}}"   wx:for-item="list" wx:key="{{index}}"></image>
+            </view>
+            
           </view>
           <view class='clearfix'>
             <view class='add fl'>
               {{item.address}}
             </view>
-            <view class='peo fr'>
-                <image src='../image/peo.png'></image>
-                {{item.browse}}
+            <view class='l_l fr' wx-if="{{item.distance}}">
+                <image src='../image/l_l.png'></image>
+                {{item.distance}}
             </view>
           </view>
           <view class='biaoqian clearfix'>
-            <view wx:for="{{item.major_scene}}" wx:for-item="biaoqian_list" wx:key="index">
-              {{biaoqian_list}}
+            <view wx:for="{{item.major_scene}}" wx:for-item="biaoqian_list" wx:key="{{index}}" class="{{biaoqian_list.status==1 ? 'red' : '' }}">
+              {{biaoqian_list.name}}
             </view>
             <image  src='../image/biaoqian_more.png' wx-if="{{item.major_scene.length==3}}"></image>
           </view>
           <view class='yuyan clearfix'>
             <image  src='../image/yuyan_more2.png' class='more2'></image>
-            <view wx:for="{{item.language}}" wx:for-item="yuyan_list" wx:key="index">
-              {{yuyan_list}}
+            <view wx:for="{{item.language}}" wx:for-item="yuyan_list" wx:key="{{index}}"  class="{{yuyan_list.status==1 ? 'red' : '' }}">
+              {{yuyan_list.name}}
             </view>
             <image  src='../image/yuyan_more.png' wx-if="{{item.language.length==3}}"></image>
           </view>
         </view>
       </view>
-      <view class='list_sub'>
-        联系Ta
+      <view class='peo'>
+          <image src='../image/peo.png'></image>
+          {{item.browse}}
       </view>
+      <!-- <view class='list_sub'>
+        联系Ta
+      </view> -->
     </view>
   </view>
-
+  
 
 
 
@@ -74,13 +109,16 @@
  <!-- 底部导航 -->
   <view class='footer clearfix'>
     <button open-type="getUserInfo" id='show-author' bindgetuserinfo="getUserInfo" wx-if="{{get_user}}"></button>
-    <view bindtap='fabu'>
+    <view bindtap='fabu' class="footer_fabu">
       <image src='{{bar[0]}}'></image>
     </view>
     <view  bindtap='liulan'>
       <image src='{{bar[3]}}'></image>
     </view>
-    <view bindtap='dingdan'>
+    <view bindtap='map' class="footer_map">
+      <image src='{{bar[4]}}'></image>
+    </view>
+    <view bindtap='dingdan' class="footer_fadan">
       <image src='{{bar[1]}}'></image>
     </view>
     <view bindtap='wode'>
